@@ -44,7 +44,7 @@ def floyd_algorthim(Gra, length):
             # bisect.insort(sorted_list_of_distances, dist[key]['distance'])
     sorted_list_of_distances = sorted(sorted_list_of_distances, reverse=True)
     # print(sorted_list_of_distances)
-    return dist, sorted_list_of_distances
+    return dist
 
 
 def get_best_choice(list_of_paths, loc_I_S, excepted_paths):

@@ -21,17 +21,33 @@ def test_sharded(full_network, shards_representation, parameterization):
     dictionary_of_node_states = {}
     num_of_non_secure_shards = 0
     try:
-        for shard_name in shards_representation:
-            dictionary_of_node_states[shard_name] = {'Honest Nodes': 0,
-                                                     'Adversary Nodes': 0,
-                                                     'Is_Secure': True}
-        for node in range(len(full_network)):
-            is_adversary = full_network.nodes[node]['is_adversary']
-            shard_name = full_network.nodes[node]['shard']
-            if is_adversary:
-                dictionary_of_node_states[shard_name]['Adversary Nodes'] += 1
-            else:
-                dictionary_of_node_states[shard_name]['Honest Nodes'] += 1
+        if type(shards_representation) == list:
+            for i in range(len(shards_representation)):
+                dictionary_of_node_states['shard_' + str(i)] = {'Honest Nodes': 0,
+                                                                'Adversary Nodes': 0,
+                                                                'Is_Secure': True}
+        else:
+            for shard_name in shards_representation:
+                dictionary_of_node_states[shard_name] = {'Honest Nodes': 0,
+                                                         'Adversary Nodes': 0,
+                                                         'Is_Secure': True}
+        for i in range(len(shards_representation)):
+            shard_name = 'shard_' + str(i)
+            for node in range(len(full_network.nodes)):
+                if node in shards_representation[i]:
+                    full_network.nodes[node]['shard'] = shard_name
+                    is_adversary = full_network.nodes[node]['is_adversary']
+                    if is_adversary:
+                        dictionary_of_node_states[shard_name]['Adversary Nodes'] += 1
+                    else:
+                        dictionary_of_node_states[shard_name]['Honest Nodes'] += 1
+        # for node in range(len(full_network.nodes)):
+        #     is_adversary = full_network.nodes[node]['is_adversary']
+        #     shard_name = full_network.nodes[node]['shard']
+        #     if is_adversary:
+        #         dictionary_of_node_states[shard_name]['Adversary Nodes'] += 1
+        #     else:
+        #         dictionary_of_node_states[shard_name]['Honest Nodes'] += 1
         for shard in dictionary_of_node_states:
             actual_adversarial_fraction = dictionary_of_node_states[shard]['Adversary Nodes'] / (dictionary_of_node_states[shard]['Honest Nodes'] + dictionary_of_node_states[shard]['Adversary Nodes'])
             print('actual_adversarial_fraction of <' + shard + '> :' + str(actual_adversarial_fraction))

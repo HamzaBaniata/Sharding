@@ -1,36 +1,40 @@
 import copy
-import create_network
-import pymetis
-
-from networkx import *
 import random
+
+import pymetis
 import sys
 
 
-
-# def random_shard(original_received_non_sharded_network):
-#     print('********\nBuilding Randomly-Sharded network.. HOLD..')
-#     received_non_sharded_network = copy.deepcopy(original_received_non_sharded_network)
-#     sharded_network_dict = {}
-#     used_nodes = []
-#     for i in range(parameterization.number_of_shards):
-#         new_label = 'shard_' + str(i + 1)
-#         sharded_network_dict[new_label] = []
-#         for j in range(parameterization.max_num_nodes_per_shard):
-#             found = False
-#             randomly_selected_node = None
-#             while not found:
-#                 randomly_selected_node = random.randint(1, parameterization.number_of_nodes)
-#                 if randomly_selected_node not in used_nodes:
-#                     used_nodes.append(randomly_selected_node)
-#                     found = True
-#             sharded_network_dict[new_label].append(randomly_selected_node)
-#     for node in range(len(received_non_sharded_network)):
-#         for shard in sharded_network_dict:
-#             if node+1 in sharded_network_dict[shard]:
-#                 received_non_sharded_network.nodes[node]['shard'] = shard
-#                 break
-#     return received_non_sharded_network, sharded_network_dict
+def random_shard(original_received_non_sharded_network, min_num_nodes_per_shard, max_num_nodes_per_shard):
+    received_non_sharded_network = copy.deepcopy(original_received_non_sharded_network)
+    sharded_network_list_of_lists = []
+    used_nodes = []
+    unused_nodes = [number for number in range(len(original_received_non_sharded_network))]
+    while len(unused_nodes) > 0:
+        shard = []
+        # 0 for min 1 for max
+        min_or_max = random.choice([0, 1])
+        if min_or_max == 1 and len(unused_nodes) > min_num_nodes_per_shard:
+            the_range = max_num_nodes_per_shard
+        if min_or_max == 0 or len(unused_nodes) == min_num_nodes_per_shard:
+            the_range = min_num_nodes_per_shard
+        try:
+            for j in range(the_range):
+                randomly_selected_node = random.choice(unused_nodes)
+                while randomly_selected_node in used_nodes:
+                    randomly_selected_node = random.choice(unused_nodes)
+                used_nodes.append(randomly_selected_node)
+                unused_nodes.remove(randomly_selected_node)
+                shard.append(randomly_selected_node)
+        except:
+            pass
+        sharded_network_list_of_lists.append(shard)
+    for node in used_nodes:
+        for shard_index in range(len(sharded_network_list_of_lists)):
+            if node in sharded_network_list_of_lists[shard_index]:
+                received_non_sharded_network.nodes[node]['shard'] = "shard_" + str(shard_index)
+                break
+    return received_non_sharded_network, sharded_network_list_of_lists
 
 
 def refine_network(network, sharded_representation):
@@ -46,17 +50,16 @@ def refine_network(network, sharded_representation):
 
 def metis_shard(non_sharded_network, num_of_shards):
     print('********\nBuilding Randomly-Sharded network using METIS .. HOLD..')
-    cut, parts = pymetis.part_graph(num_of_shards, non_sharded_network)
-    sharded_network_dict = {}
+    cut, shard_distribution = pymetis.part_graph(num_of_shards, non_sharded_network)
+    sharded_network_list_of_lists = []
     for i in range(num_of_shards):
-        new_label = 'shard_' + str(i + 1)
-        sharded_network_dict[new_label] = []
+        sharded_network_list_of_lists.append([])
     copy_of_non_sharded_network = copy.deepcopy(non_sharded_network)
-    for i in range(len(parts)):
-        shard_name = 'shard_' + str(parts[i] + 1)
+    for i in range(len(shard_distribution)):
+        shard_name = 'shard_' + str(shard_distribution[i])
         copy_of_non_sharded_network.nodes[i]['shard'] = shard_name
-        sharded_network_dict[shard_name].append(i + 1)
-    return copy_of_non_sharded_network, sharded_network_dict
+        sharded_network_list_of_lists[shard_distribution[i]].append(i)
+    return copy_of_non_sharded_network, sharded_network_list_of_lists
 
 
     # boss_sharded_network = {}

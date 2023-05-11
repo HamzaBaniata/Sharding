@@ -1,8 +1,12 @@
 {
   "network_model(1:ER,2:BA)": 1,
-  "num_of_shards": 20,
   "upper_bound_adversary_fraction (0 <= Psi <= 1)": 0.49,
   "actual_adversary_fraction_to_be_tested (K/N <= Psi)": 0.4,
   "min_edge_weight": 1,
-  "max_edge_weight": 100
+  "max_edge_weight": 1000,
+  "intra_shard_weight_importance": 0.8,
+  "number_of_GA_generations": 100,
+  "percentage_of_nodes_to_be_mutated": 0.2,
+  "GA_population_size": 10,
+  "Tolerable_number_of_GA_solution_repetitions": 3
 }

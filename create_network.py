@@ -48,7 +48,7 @@ def construct_ER_network(this_parameterization, number_of_nodes):
 
 
 def construct_BA_network(this_parameterization, number_of_nodes):
-    network = nx.barabasi_albert_graph(this_parameterization.number_of_nodes, int(this_parameterization.parameter))
+    network = nx.barabasi_albert_graph(number_of_nodes, int(this_parameterization.parameter))
     network.name = 'Barabási – Albert(BA)'
     for u, v in combinations(network, 2):
         if network.has_edge(u, v) and 'weight' not in network.edges[u, v]:
