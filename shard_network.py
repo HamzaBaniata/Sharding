@@ -62,33 +62,6 @@ def metis_shard(non_sharded_network, num_of_shards):
     return copy_of_non_sharded_network, sharded_network_list_of_lists
 
 
-    # boss_sharded_network = {}
-    # for i in range(parameterization.number_of_shards):
-    #     title_of_shard = 'shard_' + str(i + 1)
-    #     boss_sharded_network[title_of_shard] = {}
-    # # add ahmad's code here
-    # return boss_sharded_network
-
-
-# def build_optimum_shard(dict_of_shortest_paths, sorted_distances, original_network):
-#     number_of_nodes_per_shard = parameterization.max_num_nodes_per_shard
-#     nodes_in_optimum_shard = set()
-#     for distance in sorted_distances:
-#         for key in dict_of_shortest_paths:
-#             if dict_of_shortest_paths[key]['distance'] == distance:
-#                 diameter_of_optimum_shard = distance
-#                 for node in dict_of_shortest_paths[key]['path']:
-#                     nodes_in_optimum_shard.add(node)
-#                 while len(nodes_in_optimum_shard) < number_of_nodes_per_shard:
-#                     list_of_adjacent_nodes = original_network.neighbors(random.choice(list(nodes_in_optimum_shard)))
-#                     for node in list_of_adjacent_nodes:
-#                         list_of_adjacent_nodes = original_network.neighbors(node)
-#
-#
-#
-#
-#                     return nodes_in_optimum_shard, diameter_of_optimum_shard
-
 def build_optimum_shard(dict_of_shortest_paths, sorted_distances):
     number_of_nodes_per_shard = parameterization.min_num_nodes_per_shard
     checked_distances = set()

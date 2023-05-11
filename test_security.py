@@ -1,6 +1,4 @@
 import networkx as nx
-import create_network
-import test_diameter
 
 
 def test_non_sharded(network, this_parameterization, num_of_nodes):
@@ -41,13 +39,6 @@ def test_sharded(full_network, shards_representation, parameterization):
                         dictionary_of_node_states[shard_name]['Adversary Nodes'] += 1
                     else:
                         dictionary_of_node_states[shard_name]['Honest Nodes'] += 1
-        # for node in range(len(full_network.nodes)):
-        #     is_adversary = full_network.nodes[node]['is_adversary']
-        #     shard_name = full_network.nodes[node]['shard']
-        #     if is_adversary:
-        #         dictionary_of_node_states[shard_name]['Adversary Nodes'] += 1
-        #     else:
-        #         dictionary_of_node_states[shard_name]['Honest Nodes'] += 1
         for shard in dictionary_of_node_states:
             actual_adversarial_fraction = dictionary_of_node_states[shard]['Adversary Nodes'] / (dictionary_of_node_states[shard]['Honest Nodes'] + dictionary_of_node_states[shard]['Adversary Nodes'])
             print('actual_adversarial_fraction of <' + shard + '> :' + str(actual_adversarial_fraction))
@@ -61,21 +52,6 @@ def test_sharded(full_network, shards_representation, parameterization):
         return is_secure, num_of_non_secure_shards
     except Exception as e:
         print(e)
-
-
-def make_dict_network(sent_dict):
-    network = nx.Graph()
-    for key in sent_dict:
-        network.add_node(key)
-        network.nodes[key]['is_adversary'] = sent_dict[key]['is_adversary']
-    return network
-
-
-def make_network_dictionary(sent_network):
-    network_as_dictionary = {}
-    for node in sent_network:
-        network_as_dictionary[node] = sent_network.nodes[node]
-    return network_as_dictionary
 
 
 def test_nodes_individually(network):

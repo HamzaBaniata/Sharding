@@ -1,6 +1,5 @@
 import copy
 import hashlib
-import sys
 from itertools import combinations
 import random
 from math import floor, ceil
@@ -8,50 +7,6 @@ import networkx as nx
 import shard_network
 import test_diameter
 
-
-# # create a graph
-# G = nx.Graph()
-# G.add_edge(0, 1, weight=0.6)
-# G.add_edge(0, 2, weight=0.2)
-# G.add_edge(0, 3, weight=0.3)
-# G.add_edge(1, 2, weight=0.4)
-# G.add_edge(1, 4, weight=0.4)
-# G.add_edge(1, 5, weight=0.5)
-# G.add_edge(2, 3, weight=0.1)
-# G.add_edge(2, 5, weight=0.1)
-# G.add_edge(3, 7, weight=0.7)
-# G.add_edge(4, 6, weight=0.9)
-# G.add_edge(4, 10, weight=0.6)
-# G.add_edge(5, 6, weight=0.5)
-# G.add_edge(5, 7, weight=0.6)
-# G.add_edge(6, 8, weight=0.3)
-# G.add_edge(6, 9, weight=0.5)
-# G.add_edge(7, 8, weight=0.4)
-# G.add_edge(7, 11, weight=0.6)
-# G.add_edge(9, 10, weight=0.2)
-# G.add_edge(9, 11, weight=0.7)
-# G.add_edge(10, 11, weight=0.1)
-#
-# num_shards = 4
-# max_nodes_per_shard = ceil(G.number_of_nodes() / num_shards)
-#
-# # create initial solutions
-# sharded_network_dict = {0: [[0, 2, 3], [1, 5, 7], [4, 6, 8], [9, 10, 11]],
-#                         1: [[0, 1, 2], [3, 7, 11], [5, 6, 8], [4, 9, 10]],
-#                         2: [[2, 3, 5], [0, 1, 4], [7, 8, 11], [6, 9, 10]],
-#                         3: [[0, 2, 5], [1, 4, 6], [3, 7, 8], [9, 10, 11]]}
-
-
-# get all connected subgraphs that have nodes between 2 AND the max number of nodes per shard
-# def get_all_connected_subgraphs(non_sharded_network, min_nodes_per_shard, max_nodes_per_shard):
-#     print('Checking connected subgraphs')
-#     all_connected_subgraphs = list(nx.enumerate_all_cliques(non_sharded_network))
-#     final_list = []
-#     for subgraph in all_connected_subgraphs:
-#         if min_nodes_per_shard <= len(subgraph) <= max_nodes_per_shard:
-#             final_list.append(subgraph)
-#     # all_connected_subgraphs = [s for s in nx.enumerate_all_cliques(non_sharded_network.edges) if max_nodes_per_shard > len(s) > min_nodes_per_shard]
-#     return final_list
 
 
 def fitness(list_of_lists_shard, intra_shard_weight_importance, non_sharded_network, dict_of_shortest_paths):

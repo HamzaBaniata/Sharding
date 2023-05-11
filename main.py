@@ -36,7 +36,6 @@ class ParameterizationData:
         self.allowed_repetitions = self.data["Tolerable_number_of_GA_solution_repetitions"]
 
 
-# def output_results(non_sharded_result, randomly_sharded_result):
 def output_results(non_sharded_result, randomly_sharded_result, ga_sharded_result):
     print('*******\nEND OF SIMULATION\nRESULTS: \n')
     print("Non Sharded Network is secure: " + str(non_sharded_result))
