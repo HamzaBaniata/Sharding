@@ -57,11 +57,18 @@ def construct_BA_network(this_parameterization, number_of_nodes):
 
 
 def initiate_adversary_status(network, number_of_nodes, target_number_of_adversary_nodes):
-    actual_number_of_adversary_nodes = 0
+    edges = sorted(network.edges(data=True), key=lambda t: t[2].get('weight', 1))
+    index_of_edge = 0
+    processed_nodes = set()
+    while len(processed_nodes) < target_number_of_adversary_nodes:
+        node_1 = edges[index_of_edge][0]
+        node_2 = edges[index_of_edge][1]
+        network.nodes[node_1]['is_adversary'] = True
+        network.nodes[node_2]['is_adversary'] = True
+        processed_nodes.add(node_1)
+        processed_nodes.add(node_2)
+        index_of_edge += 1
     for i in range(number_of_nodes):
-        if actual_number_of_adversary_nodes < target_number_of_adversary_nodes:
-            network.nodes[i]['is_adversary'] = True
-            actual_number_of_adversary_nodes += 1
-        else:
+        if i not in processed_nodes:
             network.nodes[i]['is_adversary'] = False
     return network
