@@ -22,6 +22,6 @@
   "max_Tolerable_number_of_GA_solution_repetitions_to_be_tested": 4,
   "step_in_Tolerable_number_of_GA_solution_repetitions_change_till_max_is_tested": 1,
   "min_net_size_to_be_tested": 10,
-  "max_net_size_to_be_tested": 50,
+  "max_net_size_to_be_tested": 20,
   "step_in_net_size_change_till_max_is_tested": 10
 }

@@ -3,6 +3,38 @@ from os import system, name
 
 
 def save_simulation_data(simulation_data):
+    averages = get_averages(simulation_data)
+    output_results(averages[0]+averages[1]+averages[2], averages[3], averages[4], simulation_data)
+    name_of_file = 'results.xlsx'
+    df = DataFrame({'Network Size': simulation_data.network_sizes,
+                    'Number of Shards': simulation_data.numbers_of_shards,
+                    "adversary_fraction": simulation_data.adversary_fraction,
+                    "intra_shard_importance": simulation_data.intra_shard_importance,
+                    "no_GA_generation": simulation_data.no_GA_generation,
+                    "percentage": simulation_data.percentage,
+                    "this_population_size": simulation_data.this_population_size,
+                    "tolerable_repetitions": simulation_data.tolerable_repetitions,
+                    'Scalability_of_random(%)': simulation_data.scalability_measures_random,
+                    'Security_of_random(%)': simulation_data.security_measures_random,
+                    'Scalability_of_GA(%)': simulation_data.scalability_measures_ga,
+                    'Security_of_GA(%)': simulation_data.security_measures_ga,
+                    'Difference in Scalability': simulation_data.scalability_difference,
+                    'Difference in Security': simulation_data.security_difference})
+    df2 = DataFrame(list({'count of positive Scalability difference': averages[0],
+                          "count of Negative Scalability difference": averages[1],
+                          "count of Zero Scalability difference": averages[2],
+                          "count of positive_Sec_dif": averages[5],
+                          "count of Neg_Sec_dif": averages[6],
+                          "count of Zero_Sec_dif": averages[7],
+                          "avg. security difference": averages[3],
+                          "avg. scalability different": averages[4],
+                          }.items()))
+
+    df.to_excel(name_of_file, sheet_name='sheet1', index=False)
+    df2.to_excel("Averages.xlsx", sheet_name='sheet2', index=False)
+
+
+def get_averages(simulation_data):
     total_sec = 0
     total_sca = 0
     Zero_Sca_dif = 0
@@ -10,7 +42,7 @@ def save_simulation_data(simulation_data):
     Neg_Sca_dif = 0
     Neg_Sec_dif = 0
     positive_Sca_dif = 0
-    positive_Sec_dif= 0
+    positive_Sec_dif = 0
     for num in simulation_data.scalability_difference:
         if num > 0:
             positive_Sca_dif += 1
@@ -29,24 +61,7 @@ def save_simulation_data(simulation_data):
             Zero_Sec_dif += 1
         total_sec += num
     avg_security_difference = total_sec/(positive_Sec_dif+Neg_Sec_dif+Zero_Sec_dif)
-    output_results(positive_Sca_dif+Neg_Sca_dif+Zero_Sca_dif, avg_security_difference, avg_scalability_different, simulation_data)
-    name_of_file = 'results.xlsx'
-    df = DataFrame({'Network Size': simulation_data.network_sizes,
-                    'Number of Shards': simulation_data.numbers_of_shards,
-                    "adversary_fraction": simulation_data.adversary_fraction,
-                    "intra_shard_importance": simulation_data.intra_shard_importance,
-                    "no_GA_generation": simulation_data.no_GA_generation,
-                    "percentage": simulation_data.percentage,
-                    "this_population_size": simulation_data.this_population_size,
-                    "tolerable_repetitions": simulation_data.tolerable_repetitions,
-                    'Scalability_of_random(%)': simulation_data.scalability_measures_random,
-                    'Security_of_random(%)': simulation_data.security_measures_random,
-                    'Scalability_of_GA(%)': simulation_data.scalability_measures_ga,
-                    'Security_of_GA(%)': simulation_data.security_measures_ga,
-                    'Difference in Scalability': simulation_data.scalability_difference,
-                    'Difference in Security': simulation_data.security_difference})
-
-    df.to_excel(name_of_file, sheet_name='sheet1', index=False)
+    return positive_Sca_dif, Neg_Sca_dif, Zero_Sca_dif, avg_security_difference, avg_scalability_different, positive_Sec_dif, Neg_Sec_dif, Zero_Sec_dif
 
 
 def output_results(number_of_tests, avg_security_difference, avg_scalability_different, simulation_data):

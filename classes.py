@@ -110,8 +110,11 @@ class TestedData:
         self.security_difference = []
         self.scalability_difference = []
 
-    def append_new_data(self, network_size, numbers_of_shards, adversary_fraction, intra_shard_importance, no_GA_generation, percentage, this_population_size, tolerable_repetitions,
-                                                                scalability_measure_random, security_measure_random, scalability_measure_ga, security_measure_ga):
+    def append_new_data(self, network_size, numbers_of_shards, adversary_fraction, intra_shard_importance,
+                        no_GA_generation, percentage, this_population_size, tolerable_repetitions,
+                        scalability_measure_random, security_measure_random, scalability_measure_ga,
+                        security_measure_ga):
+
         self.network_sizes.append(network_size)
         self.numbers_of_shards.append(numbers_of_shards)
 

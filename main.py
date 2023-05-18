@@ -11,7 +11,7 @@ import output
 
 def test(this_parameterization, num_of_nodes):
     non_sharded_network_graph = create_network.construct_network(this_parameterization, num_of_nodes)
-    non_sharded_network_is_secure = test_security.test_non_sharded(non_sharded_network_graph, this_parameterization, num_of_nodes)
+    # non_sharded_network_is_secure = test_security.test_non_sharded(non_sharded_network_graph, this_parameterization, num_of_nodes)
     dict_of_shortest_paths, diam_of_non_sharded = test_diameter.get_diameter(non_sharded_network_graph)
     # print('Diameter of non_sharded = ' + str(diam_of_non_sharded))
     copy_of_non_sharded_network, list_of_lists_sharded_network_randomly = shard_network.random_shard(non_sharded_network_graph, this_parameterization)
@@ -81,4 +81,4 @@ if __name__ == "__main__":
         keep_simulating, net_size = ParameterizationData.get_number_of_nodes()
 
     output.save_simulation_data(simulation_data)
-    print('Simulation finished. Please check the excel file to see the simulation results.')
+    print('Simulation finished. Please check the excel files to see the detailed Simulation Results.')
