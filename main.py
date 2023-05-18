@@ -33,37 +33,37 @@ if __name__ == "__main__":
     while keep_simulating:
         # change adversary fractions
         adversary_fraction, stop1, step1 = ParameterizationData.get_parameters_adversary_fraction()
-        print("Net_size:" + str(net_size))
+
         while adversary_fraction < stop1:
-            print("adversary_fraction:" + str(adversary_fraction))
+
             ParameterizationData.actual_adversary_fraction = adversary_fraction
             ParameterizationData.target_number_of_adversary_nodes = math.floor(adversary_fraction * net_size)
             intra_shard_importance, stop2, step2 = ParameterizationData.get_parameters_intra_shard_weight_importance()
             # change shard importance
             while intra_shard_importance < stop2:
-                print("intra_shard_importance:" + str(intra_shard_importance))
+
                 ParameterizationData.intra_shard_weight_importance = intra_shard_importance
                 no_GA_generation, stop3, step3 = ParameterizationData.get_parameters_number_of_GA_generations()
                 # change number of GA generations
                 while no_GA_generation < stop3:
-                    print("no_GA_generation:" + str(no_GA_generation))
+
                     ParameterizationData.number_of_GA_generations = no_GA_generation
                     percentage, stop4, step4 = ParameterizationData.get_parameters_percentage_of_nodes_to_be_mutated()
                     # change percentage of nodes to be mutated
                     while percentage < stop4:
-                        print("percentage_of_nodes_to_be_mutated:" + str(percentage))
+
                         ParameterizationData.percentage_of_nodes_to_be_mutated = percentage
                         this_population_size, stop5, step5 = ParameterizationData.get_parameters_GA_population_size()
                         # change GA population size
                         while this_population_size < stop5:
-                            print("population_size:" + str(this_population_size))
+
                             ParameterizationData.population_size = this_population_size
                             tolerable_repetitions, stop6, step6 = ParameterizationData.get_parameters_GA_solution_repetitions()
                             # change GA tolerable number of repetitions
                             while tolerable_repetitions < stop6:
-                                print("allowed_repetitions:" + str(tolerable_repetitions))
-                                ParameterizationData.allowed_repetitions = tolerable_repetitions
                                 num_of_shards = ParameterizationData.number_of_shards
+                                output.print_on_screen(net_size, num_of_shards, adversary_fraction, intra_shard_importance, no_GA_generation, percentage, this_population_size, tolerable_repetitions)
+                                ParameterizationData.allowed_repetitions = tolerable_repetitions
                                 diameter_of_non_sharded, average_shard_diameter_random, number_of_non_secure_shards_random,\
                                     average_shard_diameter_ga, number_of_non_secure_shards_ga \
                                     = test(ParameterizationData, net_size)
@@ -81,3 +81,4 @@ if __name__ == "__main__":
         keep_simulating, net_size = ParameterizationData.get_number_of_nodes()
 
     output.save_simulation_data(simulation_data)
+    print('Simulation finished. Please check the excel file to see the simulation results.')
