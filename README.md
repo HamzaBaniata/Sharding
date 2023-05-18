@@ -16,7 +16,7 @@ Used to shard a randomly connected Blockchain network, and then test its securit
 
 1- Clone the repository
 
-2- Modify on the Sim_parametersl.json file (values are self explanatory! if not clear enough, please contact the repo owner)
+2- Modify on the Sim_parametersl.json file (values are self explanatory! if not clear enough, please contact the repo owner"HamzaBaniata")
 
 3- Run main.py (install any missing packages. This code was tested on Linux. It is preferred to run main.py in the terminal not on the editor "e.g. Pycharm".)
 
