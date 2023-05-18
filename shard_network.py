@@ -38,7 +38,7 @@ def random_shard(original_received_non_sharded_network, parameterization):
 
 
 def metis_shard(non_sharded_network, num_of_shards):
-    print('********\nBuilding Randomly-Sharded network using METIS .. HOLD..')
+    # print('********\nBuilding Randomly-Sharded network using METIS .. HOLD..')
     cut, shard_distribution = pymetis.part_graph(num_of_shards, non_sharded_network)
     sharded_network_list_of_lists = []
     for i in range(num_of_shards):

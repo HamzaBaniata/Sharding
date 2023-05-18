@@ -11,7 +11,7 @@ def get_diameter(sent_graph):
     for element in dict_of_shortest_paths:
         if inf > dict_of_shortest_paths[element]['distance'] > diameter_of_this_network:
             diameter_of_this_network = dict_of_shortest_paths[element]['distance']
-    print('Diameter of ' + sent_graph.name + ' = ' + str(diameter_of_this_network))
+    # print('Diameter of ' + sent_graph.name + ' = ' + str(diameter_of_this_network))
     return dict_of_shortest_paths, diameter_of_this_network
 
 
@@ -28,7 +28,7 @@ def get_diameters_of_shards(shards_representation, dict_of_shortest_paths):
             path_length = dict_of_shortest_paths[str(node) + "_" + str(neighbour_node)]["distance"]
             if inf > path_length > diameter_of_this_shard:
                 diameter_of_this_shard = path_length
-        print('Diameter of ' + shard_name + ' = ' + str(diameter_of_this_shard))
+        # print('Diameter of ' + shard_name + ' = ' + str(diameter_of_this_shard))
         accumulated_diameters += diameter_of_this_shard
 
     return accumulated_diameters/len(shards_representation)

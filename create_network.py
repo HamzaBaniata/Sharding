@@ -12,11 +12,11 @@ def read_file(label):
 
 
 def construct_network(this_parameterization, number_of_nodes):
-    print('********\nBuilding non-sharded network.. HOLD..')
+    # print('********\nBuilding non-sharded network.. HOLD..')
     constructed_network, connected = create_selected_network_type(this_parameterization, number_of_nodes)
-    print('connected?: ' + str(connected))
-    print('[SUCCESS] Network is built')
-    print(constructed_network.name)
+    # print('connected?: ' + str(connected))
+    # print('[SUCCESS] Network is built')
+    # print(constructed_network.name)
     return constructed_network
 
 

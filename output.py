@@ -5,6 +5,12 @@ def save_simulation_data(simulation_data):
     name_of_file = 'results.xlsx'
     df = DataFrame({'Network Size': simulation_data.network_sizes,
                     'Number of Shards': simulation_data.numbers_of_shards,
+                    "adversary_fraction": simulation_data.adversary_fraction,
+                    "intra_shard_importance": simulation_data.intra_shard_importance,
+                    "no_GA_generation": simulation_data.no_GA_generation,
+                    "percentage": simulation_data.percentage,
+                    "this_population_size": simulation_data.this_population_size,
+                    "tolerable_repetitions": simulation_data.tolerable_repetitions,
                     'Scalability_of_random(%)': simulation_data.scalability_measures_random,
                     'Security_of_random(%)': simulation_data.security_measures_random,
                     'Scalability_of_GA(%)': simulation_data.scalability_measures_ga,

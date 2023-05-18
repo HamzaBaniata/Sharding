@@ -1,8 +1,6 @@
 import sys
 from itertools import combinations
 
-import create_network
-
 inf = sys.maxsize
 
 

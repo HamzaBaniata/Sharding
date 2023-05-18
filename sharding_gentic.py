@@ -2,7 +2,7 @@ import copy
 import hashlib
 from itertools import combinations
 import random
-from math import floor, ceil
+from math import floor
 import networkx as nx
 import shard_network
 import test_diameter
@@ -114,7 +114,7 @@ def return_first_population(non_sharded_network, parameterizationdata):
 def shard_network_GA(non_sharded_network_graph, this_parameterization, dict_of_shortest_paths):
     min_nodes_per_shard = floor(len(non_sharded_network_graph) / this_parameterization.number_of_shards)
     current_population = return_first_population(non_sharded_network_graph, this_parameterization)
-    print('Generation: 0')
+    # print('Generation: 0')
     new_gen, current_best_solution, current_best_fitness = get_best_solution(current_population,
                                                                              this_parameterization,
                                                                              non_sharded_network_graph,
