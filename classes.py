@@ -35,7 +35,7 @@ class ParameterizationData:
 
         self.step_in_GA_population_size_change_till_max_is_tested = self.data['step_in_GA_population_size_change_till_max_is_tested']
         self.min_GA_population_size_to_be_tested = self.data['min_GA_population_size_to_be_tested']
-        self.max_GA_population_size_to_be_tested = self.data['max_net_size_to_be_tested']
+        self.max_GA_population_size_to_be_tested = self.data['max_GA_population_size_to_be_tested']
 
         self.step_in_Tolerable_number_of_GA_solution_repetitions_change_till_max_is_tested = self.data['step_in_Tolerable_number_of_GA_solution_repetitions_change_till_max_is_tested']
         self.min_Tolerable_number_of_GA_solution_repetitions_to_be_tested = self.data['min_Tolerable_number_of_GA_solution_repetitions_to_be_tested']
