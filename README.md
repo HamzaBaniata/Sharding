@@ -26,3 +26,6 @@ Used to shard a randomly connected Blockchain network, and then test its securit
 # References:
 -- Baniata, Hamza, and Attila Kertesz. "Approaches to Overpower Proof-of-Work Blockchains Despite Minority." IEEE Access 11 (2023): 2952-2967.
 available at: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10006812
+
+--Baniata, Hamza, Anaqreh, Ahmad, & Kertesz, Attila. (2023). Full database for test results of the BOSS protocol (1.0) [Data set]. Zenodo.
+available at: https://doi.org/10.5281/zenodo.8037447
