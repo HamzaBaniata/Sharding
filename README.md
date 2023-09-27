@@ -24,6 +24,8 @@ Used to shard a randomly connected Blockchain network, and then test its securit
 
 
 # References:
+-- Hamza Baniata, Ahmad Anaqreh, Attila Kertesz. "Distributed scalability tuning for optimized evolutionary sharding with Random-equivalent security in permissionless Blockchain", Internet of Things (2023). DOI: https://doi.org/10.1016/j.iot.2023.100955
+
 -- Baniata, Hamza, and Attila Kertesz. "Approaches to Overpower Proof-of-Work Blockchains Despite Minority." IEEE Access 11 (2023): 2952-2967.
 available at: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10006812
 
